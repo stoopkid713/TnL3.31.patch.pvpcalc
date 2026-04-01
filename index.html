@@ -336,19 +336,24 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
       <p class="cnote">At T3 base gear, endurance (~3,500) still walls typical crit (~3,000). The gap only opens in burst windows with Lightning Infusion + endurance shred active.</p>
     </div>
   </div>
-  <div class="bench-label">Presets</div>
-  <div class="bench-row">
-    <div class="bench-group-label">Real T3 Matchups</div>
-    <button class="bench-btn t3" onclick="loadBench('crit',3000,3500,'3k crit vs 3.5k end','t3')">3k Crit vs 3.5k End</button>
-    <button class="bench-btn t3" onclick="loadBench('crit',3600,2700,'burst window 3.6k vs shredded 2.7k','t3')">Burst window: 3.6k vs shredded 2.7k</button>
-    <button class="bench-btn t3" onclick="loadBench('crit',3600,3500,'li buffed 3.6k vs 3.5k end','t3')">LI buffed 3.6k vs 3.5k End</button>
-    <div class="bench-group-label">Zero Stat — Where Patch Fires</div>
-    <button class="bench-btn zero-preset" onclick="loadBench('crit',3000,500,'3k crit vs zero end','zero')">3k Crit vs Zero End</button>
-    <button class="bench-btn zero-preset" onclick="loadBench('crit',3600,500,'buffed 3.6k vs zero end','zero')">Buffed 3.6k vs Zero End</button>
-    <button class="bench-btn zero-preset" onclick="loadBench('crit',9999,3500,'guaranteed crit vs 3.5k end','zero')">Guaranteed Crit vs 3.5k End</button>
-    <div class="bench-group-label">Cap Thresholds</div>
-    <button class="bench-btn cap-preset" onclick="loadBench('crit',3250,1000,'arena cap fires gap 2.25k','cap')">Arena Cap fires — gap 2.25k</button>
-    <button class="bench-btn cap-preset" onclick="loadBench('crit',4000,1000,'bg cap fires gap 3k','cap')">BG Cap fires — gap 3k</button>
+    <div class="preset-grid">
+    <div class="preset-col">
+      <div class="preset-col-label lbl-t3">🟢 T3 Meta</div>
+      <button class="bench-btn t3" onclick="loadBench('crit',3000,3500,'3k crit vs 3.5k end','t3')">3k Crit vs 3.5k End</button>
+      <button class="bench-btn t3" onclick="loadBench('crit',3600,2700,'burst window 3.6k vs shredded 2.7k','t3')">Burst window: 3.6k vs shredded 2.7k</button>
+      <button class="bench-btn t3" onclick="loadBench('crit',3600,3500,'li buffed 3.6k vs 3.5k end','t3')">LI buffed 3.6k vs 3.5k End</button>
+    </div>
+    <div class="preset-col">
+      <div class="preset-col-label lbl-zero">🩷 Zero Stat</div>
+      <button class="bench-btn zero-preset" onclick="loadBench('crit',3000,500,'3k crit vs zero end','zero')">3k Crit vs Zero End</button>
+      <button class="bench-btn zero-preset" onclick="loadBench('crit',3600,500,'buffed 3.6k vs zero end','zero')">Buffed 3.6k vs Zero End</button>
+      <button class="bench-btn zero-preset" onclick="loadBench('crit',9999,3500,'guaranteed crit vs 3.5k end','zero')">Guaranteed Crit vs 3.5k End</button>
+    </div>
+    <div class="preset-col">
+      <div class="preset-col-label lbl-cap">🔴 Cap Thresholds</div>
+      <button class="bench-btn cap-preset" onclick="loadBench('crit',3250,1000,'arena cap fires gap 2.25k','cap')">Arena Cap fires — gap 2.25k</button>
+      <button class="bench-btn cap-preset" onclick="loadBench('crit',4000,1000,'bg cap fires gap 3k','cap')">BG Cap fires — gap 3k</button>
+    </div>
   </div>
   </div><div class="dash-right">
   <div class="slider-grid">

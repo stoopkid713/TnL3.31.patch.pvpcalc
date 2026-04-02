@@ -82,6 +82,10 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 .slider-card-label{font-size:12px;color:var(--text);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px}
 .slider-value{font-family:'Cinzel',serif;font-size:21px;font-weight:600;margin-bottom:7px;line-height:1}
 .slider-value.atk-val{color:var(--crit)}.slider-value.def-val{color:var(--cc)}
+input.slider-value{background:transparent;border:none;border-radius:var(--radius-sm);padding:4px 8px;color:inherit;text-align:left;width:100%;font-family:'Cinzel',serif;font-size:21px;font-weight:600;margin-bottom:7px;line-height:1}
+input.slider-value:focus{outline:none;border:1px solid var(--gold);box-shadow:0 0 8px rgba(201,168,76,0.3)}
+input.slider-value::-webkit-outer-spin-button,input.slider-value::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+input.slider-value{-moz-appearance:textfield}
 input[type=range]{-webkit-appearance:none;width:100%;height:4px;background:var(--card2);border-radius:2px;outline:none}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--gold);cursor:pointer;border:2px solid var(--bg);box-shadow:0 0 8px rgba(201,168,76,0.4)}
 .def-card input[type=range]::-webkit-slider-thumb{background:var(--purple2);box-shadow:0 0 8px rgba(160,125,224,0.4)}
@@ -90,6 +94,10 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
 .base-row{display:flex;align-items:center;gap:10px}
 .base-row label{font-size:12px;color:var(--muted);white-space:nowrap;min-width:60px}
 .base-val{font-size:15px;font-weight:700;color:var(--cc);min-width:38px;text-align:right}
+input.base-val{background:var(--card2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:4px 8px;margin:0;font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:700;color:var(--cc);width:60px;text-align:right}
+input.base-val:focus{outline:none;border-color:var(--gold);box-shadow:0 0 8px rgba(201,168,76,0.3)}
+input.base-val::-webkit-outer-spin-button,input.base-val::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+input.base-val{-moz-appearance:textfield}
 .mode-row{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:12px}
 .mode-btn{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:6px 2px;font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;color:var(--text);cursor:pointer;text-align:center;text-transform:uppercase}
 .mode-btn .mode-cap{font-size:11px;font-weight:400;color:var(--muted);margin-top:1px}
@@ -310,8 +318,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
   </div>
   </div><div class="dash-right">
   <div class="slider-grid">
-    <div class="slider-card atk-card"><div class="slider-card-label" id="hit-atk-lbl">⚔ Your Hit</div><div class="slider-value atk-val" id="hit-atk-val">4,800</div><input type="range" min="500" max="7000" value="4800" step="50" id="hit-atk" oninput="trackSlider('hit');calc('hit')"/><div class="slider-sub">T3 unbuffed: ~4,800+</div></div>
-    <div class="slider-card def-card"><div class="slider-card-label" id="hit-def-lbl">🛡 Opp Evasion</div><div class="slider-value def-val" id="hit-def-val">5,100</div><input type="range" min="500" max="7000" value="5100" step="50" id="hit-def" oninput="trackSlider('hit');calc('hit')"/><div class="slider-sub">T3 unbuffed: ~5,100+</div></div>
+    <div class="slider-card atk-card"><div class="slider-card-label" id="hit-atk-lbl">⚔ Your Hit</div><input type="number" class="slider-value atk-val" id="hit-atk-val" value="4800" oninput="syncSliderFromInput('hit-atk');trackSlider('hit');calc('hit')"/><input type="range" min="500" max="7000" value="4800" step="50" id="hit-atk" oninput="syncSliderDisplay('hit-atk-val');trackSlider('hit');calc('hit')"/><div class="slider-sub">T3 unbuffed: ~4,800+</div></div>
+    <div class="slider-card def-card"><div class="slider-card-label" id="hit-def-lbl">🛡 Opp Evasion</div><input type="number" class="slider-value def-val" id="hit-def-val" value="5100" oninput="syncSliderFromInput('hit-def');trackSlider('hit');calc('hit')"/><input type="range" min="500" max="7000" value="5100" step="50" id="hit-def" oninput="syncSliderDisplay('hit-def-val');trackSlider('hit');calc('hit')"/><div class="slider-sub">T3 unbuffed: ~5,100+</div></div>
   </div>
   <div class="mode-row" id="hit-modes"></div>
   <div class="result-main"><div class="result-label" id="hit-rlbl">Attacker Hit Chance</div><div class="result-pct" id="hit-pct">—</div><div class="result-status" id="hit-status"></div><div class="result-gap-row"><div class="gap-item"><div class="gap-label">Raw Gap</div><div class="gap-val" id="hit-rg">—</div></div><div class="gap-item"><div class="gap-label">Eff Gap</div><div class="gap-val" id="hit-eg">—</div></div><div class="gap-item"><div class="gap-label" id="hit-tl">Dodge %</div><div class="gap-val" id="hit-tv">—</div></div></div></div>
@@ -358,8 +366,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
   </div>
   </div><div class="dash-right">
   <div class="slider-grid">
-    <div class="slider-card atk-card"><div class="slider-card-label" id="crit-atk-lbl">⚔ Your Crit</div><div class="slider-value atk-val" id="crit-atk-val">3,000</div><input type="range" min="500" max="7000" value="3000" step="50" id="crit-atk" oninput="trackSlider('crit');calc('crit')"/><div class="slider-sub">T3 base: ~3,000 / buffed: ~3,600</div></div>
-    <div class="slider-card def-card"><div class="slider-card-label" id="crit-def-lbl">🛡 Opp Endurance</div><div class="slider-value def-val" id="crit-def-val">3,500</div><input type="range" min="500" max="7000" value="3500" step="50" id="crit-def" oninput="trackSlider('crit');calc('crit')"/><div class="slider-sub">T3 avg: ~3,500</div></div>
+    <div class="slider-card atk-card"><div class="slider-card-label" id="crit-atk-lbl">⚔ Your Crit</div><input type="number" class="slider-value atk-val" id="crit-atk-val" value="3000" oninput="syncSliderFromInput('crit-atk');trackSlider('crit');calc('crit')"/><input type="range" min="500" max="7000" value="3000" step="50" id="crit-atk" oninput="syncSliderDisplay('crit-atk-val');trackSlider('crit');calc('crit')"/><div class="slider-sub">T3 base: ~3,000 / buffed: ~3,600</div></div>
+    <div class="slider-card def-card"><div class="slider-card-label" id="crit-def-lbl">🛡 Opp Endurance</div><input type="number" class="slider-value def-val" id="crit-def-val" value="3500" oninput="syncSliderFromInput('crit-def');trackSlider('crit');calc('crit')"/><input type="range" min="500" max="7000" value="3500" step="50" id="crit-def" oninput="syncSliderDisplay('crit-def-val');trackSlider('crit');calc('crit')"/><div class="slider-sub">T3 avg: ~3,500</div></div>
   </div>
   <div class="mode-row" id="crit-modes"></div>
   <div class="result-main"><div class="result-label" id="crit-rlbl">Crit Land Chance</div><div class="result-pct" id="crit-pct">—</div><div class="result-status" id="crit-status"></div><div class="result-gap-row"><div class="gap-item"><div class="gap-label">Raw Gap</div><div class="gap-val" id="crit-rg">—</div></div><div class="gap-item"><div class="gap-label">Eff Gap</div><div class="gap-val" id="crit-eg">—</div></div><div class="gap-item"><div class="gap-label" id="crit-tl">Glancing %</div><div class="gap-val" id="crit-tv">—</div></div></div></div>
@@ -405,8 +413,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
   </div>
   </div><div class="dash-right">
   <div class="slider-grid">
-    <div class="slider-card atk-card"><div class="slider-card-label" id="heavy-atk-lbl">⚔ Your Heavy Atk</div><div class="slider-value atk-val" id="heavy-atk-val">2,450</div><input type="range" min="0" max="6000" value="2450" step="50" id="heavy-atk" oninput="trackSlider('heavy');calc('heavy')"/><div class="slider-sub">Magic T3: ~2,450 / Melee: ~1,500</div></div>
-    <div class="slider-card def-card"><div class="slider-card-label" id="heavy-def-lbl">🛡 Opp Heavy Eva</div><div class="slider-value def-val" id="heavy-def-val">250</div><input type="range" min="0" max="6000" value="250" step="50" id="heavy-def" oninput="trackSlider('heavy');calc('heavy')"/><div class="slider-sub">Typical: 200–300 / Counter build: ~2,450</div></div>
+    <div class="slider-card atk-card"><div class="slider-card-label" id="heavy-atk-lbl">⚔ Your Heavy Atk</div><input type="number" class="slider-value atk-val" id="heavy-atk-val" value="2450" oninput="syncSliderFromInput('heavy-atk');trackSlider('heavy');calc('heavy')"/><input type="range" min="0" max="6000" value="2450" step="50" id="heavy-atk" oninput="syncSliderDisplay('heavy-atk-val');trackSlider('heavy');calc('heavy')"/><div class="slider-sub">Magic T3: ~2,450 / Melee: ~1,500</div></div>
+    <div class="slider-card def-card"><div class="slider-card-label" id="heavy-def-lbl">🛡 Opp Heavy Eva</div><input type="number" class="slider-value def-val" id="heavy-def-val" value="250" oninput="syncSliderFromInput('heavy-def');trackSlider('heavy');calc('heavy')"/><input type="range" min="0" max="6000" value="250" step="50" id="heavy-def" oninput="syncSliderDisplay('heavy-def-val');trackSlider('heavy');calc('heavy')"/><div class="slider-sub">Typical: 200–300 / Counter build: ~2,450</div></div>
   </div>
   <div class="mode-row" id="heavy-modes"></div>
   <div class="result-main"><div class="result-label" id="heavy-rlbl">Heavy Atk Proc Chance</div><div class="result-pct" id="heavy-pct">—</div><div class="result-status" id="heavy-status"></div><div class="result-gap-row"><div class="gap-item"><div class="gap-label">Raw Gap</div><div class="gap-val" id="heavy-rg">—</div></div><div class="gap-item"><div class="gap-label">Eff Gap</div><div class="gap-val" id="heavy-eg">—</div></div><div class="gap-item"><div class="gap-label" id="heavy-tl">Def Reduce</div><div class="gap-val" id="heavy-tv">—</div></div></div></div>
@@ -454,10 +462,10 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
   </div>
   </div><div class="dash-right">
   <div class="slider-grid">
-    <div class="slider-card atk-card"><div class="slider-card-label" id="cc-atk-lbl">⚔ CC Chance</div><div class="slider-value atk-val" id="cc-atk-val">3,100</div><input type="range" min="500" max="7000" value="3100" step="50" id="cc-atk" oninput="trackSlider('cc');calc('cc')"/><div class="slider-sub">T3 unbuffed: ~3,100</div></div>
-    <div class="slider-card def-card"><div class="slider-card-label" id="cc-def-lbl">🛡 CC Resist</div><div class="slider-value def-val" id="cc-def-val">3,400</div><input type="range" min="500" max="7000" value="3400" step="50" id="cc-def" oninput="trackSlider('cc');calc('cc')"/><div class="slider-sub">T3 unbuffed: ~3,400</div></div>
+    <div class="slider-card atk-card"><div class="slider-card-label" id="cc-atk-lbl">⚔ CC Chance</div><input type="number" class="slider-value atk-val" id="cc-atk-val" value="3100" oninput="syncSliderFromInput('cc-atk');trackSlider('cc');calc('cc')"/><input type="range" min="500" max="7000" value="3100" step="50" id="cc-atk" oninput="syncSliderDisplay('cc-atk-val');trackSlider('cc');calc('cc')"/><div class="slider-sub">T3 unbuffed: ~3,100</div></div>
+    <div class="slider-card def-card"><div class="slider-card-label" id="cc-def-lbl">🛡 CC Resist</div><input type="number" class="slider-value def-val" id="cc-def-val" value="3400" oninput="syncSliderFromInput('cc-def');trackSlider('cc');calc('cc')"/><input type="range" min="500" max="7000" value="3400" step="50" id="cc-def" oninput="syncSliderDisplay('cc-def-val');trackSlider('cc');calc('cc')"/><div class="slider-sub">T3 unbuffed: ~3,400</div></div>
   </div>
-  <div class="base-card"><div class="bench-label" style="margin-bottom:8px">Skill Base Land %</div><div class="base-row"><label>Base %</label><input type="range" min="10" max="100" value="80" step="5" id="cc-base" oninput="trackSlider('cc');calc('cc')"/><div class="base-val" id="cc-base-val">80%</div></div></div>
+  <div class="base-card"><div class="bench-label" style="margin-bottom:8px">Skill Base Land %</div><div class="base-row"><label>Base %</label><input type="range" min="10" max="100" value="80" step="5" id="cc-base" oninput="syncCCBaseDisplay();trackSlider('cc');calc('cc')"/><input type="number" class="base-val" id="cc-base-val" value="80" oninput="syncCCBaseFromInput();trackSlider('cc');calc('cc')"/></div></div>
   <div class="mode-row" id="cc-modes"></div>
   <div class="result-main"><div class="result-label" id="cc-rlbl">CC Land Chance</div><div class="result-pct" id="cc-pct">—</div><div class="result-status" id="cc-status"></div><div class="result-gap-row"><div class="gap-item"><div class="gap-label">Raw Gap</div><div class="gap-val" id="cc-rg">—</div></div><div class="gap-item"><div class="gap-label">Eff Gap</div><div class="gap-val" id="cc-eg">—</div></div><div class="gap-item"><div class="gap-label" id="cc-tl">Base Floor</div><div class="gap-val" id="cc-tv">—</div></div></div></div>
   <div class="mode-results" id="cc-mr"></div>
@@ -553,9 +561,9 @@ function updPL(t){
 function ga(t){return parseInt(document.getElementById(t+(P==='atk'?'-atk':'-def')).value);}
 function gd(t){return parseInt(document.getElementById(t+(P==='atk'?'-def':'-atk')).value);}
 
-function hitC(a,d,c,n){const r=d-a;if(r<=0)return 100;const e=n?r:Math.min(r,c[1]);return Math.round((100-(e/(e+1000))*100)*10)/10;}
-function critC(a,d,c,n){const r=a-d;if(r<=0)return 0;const eff=n?r:Math.min(r,c[0]);return Math.round((eff/(eff+1000))*1000)/10;}
-function ccC(a,d,c,n,Z,W){const r=a-d;let e=n?r:(r>0?Math.min(r,c[0]):Math.max(r,-c[1]));if(e>=0)return Math.round((Z+W*(e/(250+e)))*1000)/10;const x=Math.abs(e);return Math.round((Z*(1-x/(250+x)))*1000)/10;}
+function hitC(a,d,c,n){const r=d-a;if(r<=0)return 100;const e=n?r:Math.min(r,c[1]);const result=100-(e/(e+1000))*100;return parseFloat(result.toFixed(1));}
+function critC(a,d,c,n){const r=a-d;if(r<=0)return 0;const eff=n?r:Math.min(r,c[0]);const result=(eff/(eff+1000))*100;return parseFloat(result.toFixed(1));}
+function ccC(a,d,c,n,Z,W){const r=a-d;let e=n?r:(r>0?Math.min(r,c[0]):Math.max(r,-c[1]));let result;if(e>=0)result=(Z+W*(e/(250+e)))*100;else{const x=Math.abs(e);result=(Z*(1-x/(250+x)))*100;}return parseFloat(result.toFixed(1));}
 
 function renderModes(t){
   const el=document.getElementById(t+'-modes'),caps=CAPS[t];
@@ -568,20 +576,23 @@ function renderModes(t){
 function setMode(t,k){AM[t]=k;calc(t);if(typeof gtag!=='undefined')gtag('event','mode_select',{tab:t,mode:k});}
 
 const _sliderTouched={};
-function trackSlider(t){if(!_sliderTouched[t]){_sliderTouched[t]=true;if(typeof gtag!=='undefined')gtag('event','slider_used',{tab:t});}}
+let _skipSliderDisplay=false;
+function syncSliderFromInput(sliderId){const inputId=sliderId+'-val';const input=document.getElementById(inputId);const slider=document.getElementById(sliderId);const val=parseInt(input.value)||0;const clamped=Math.max(parseInt(slider.min)||0,Math.min(parseInt(slider.max)||999999,val));_skipSliderDisplay=true;slider.step='1';slider.value=clamped;slider.step='50';_skipSliderDisplay=false;}
+function syncSliderDisplay(inputId){if(_skipSliderDisplay)return;const input=document.getElementById(inputId);const sliderId=inputId.replace('-val','');const slider=document.getElementById(sliderId);input.value=parseInt(slider.value);}
+function syncCCBaseFromInput(){const input=document.getElementById('cc-base-val');const slider=document.getElementById('cc-base');const val=Math.max(parseInt(slider.min)||10,Math.min(parseInt(slider.max)||100,parseInt(input.value)||10));slider.value=val;input.value=val;}
+function syncCCBaseDisplay(){const slider=document.getElementById('cc-base');const input=document.getElementById('cc-base-val');input.value=parseInt(slider.value);}
+function trackSlider(t){if(!_sliderTouched[t]){_sliderTouched[t]=true;if(typeof gtag!=='undefined')gtag('event','slider_used',{tab:t});}};
 function calc(t){
   const atk=ga(t),def=gd(t);
-  document.getElementById(t+'-atk-val').textContent=parseInt(document.getElementById(t+'-atk').value).toLocaleString();
-  document.getElementById(t+'-def-val').textContent=parseInt(document.getElementById(t+'-def').value).toLocaleString();
   let Z=0.8,W=0.2;
-  if(t==='cc'){const b=parseInt(document.getElementById('cc-base').value);Z=b/100;W=1-Z;document.getElementById('cc-base-val').textContent=b+'%';}
+  if(t==='cc'){const b=parseInt(document.getElementById('cc-base').value);Z=b/100;W=1-Z;document.getElementById('cc-base-val').value=b;}
   const mode=AM[t],cap=mode==='pre'?null:CAPS[t][mode],np=mode==='pre';
   let mp,rg,eg;
 
   if(t==='hit'){
-    // Always use raw slider values so hitC(hit, evasion) gets correct args regardless of perspective
-    const hitVal=parseInt(document.getElementById('hit-atk').value);
-    const evaVal=parseInt(document.getElementById('hit-def').value);
+    // Read from input display fields to use exact typed values, not slider-constrained values
+    const hitVal=parseInt(document.getElementById('hit-atk-val').value);
+    const evaVal=parseInt(document.getElementById('hit-def-val').value);
     const hitChance=hitC(hitVal,evaVal,cap,np);
     const dodgePct=100-hitChance;
     // Gap: evasion - hit (positive = defender winning)
@@ -614,8 +625,8 @@ function calc(t){
     document.getElementById('hit-an').innerHTML=an;
 
   } else if(t==='crit'||t==='heavy'){
-    const atkRaw=parseInt(document.getElementById(t+'-atk').value);
-    const defRaw=parseInt(document.getElementById(t+'-def').value);
+    const atkRaw=parseInt(document.getElementById(t+'-atk-val').value);
+    const defRaw=parseInt(document.getElementById(t+'-def-val').value);
     const isDef=P==='def';
     mp=critC(atkRaw,defRaw,cap,np);
     rg=atkRaw-defRaw;eg=rg<=0?rg:(np?rg:Math.min(rg,cap[0]));
@@ -647,8 +658,8 @@ function calc(t){
     document.getElementById(t+'-an').innerHTML=an;
 
   } else {
-    const ccAtkRaw=parseInt(document.getElementById("cc-atk").value);
-    const ccDefRaw=parseInt(document.getElementById("cc-def").value);
+    const ccAtkRaw=parseInt(document.getElementById("cc-atk-val").value);
+    const ccDefRaw=parseInt(document.getElementById("cc-def-val").value);
     rg=ccAtkRaw-ccDefRaw;const effV=np?rg:(rg>0?Math.min(rg,cap[0]):Math.max(rg,-cap[1]));mp=ccC(ccAtkRaw,ccDefRaw,cap,np,Z,W);
     const ccIsDef=P==='def';
     const ccDisp=ccIsDef?(100-mp):mp;
